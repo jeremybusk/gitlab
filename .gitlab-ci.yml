@@ -6,6 +6,7 @@ test:
     - echo "hello hi"
     - echo "change"
     - echo "change 2"
+    - echo "change 3"
   # - apt-get update -qy
   # - apt-get install -y python-dev python-pip
   # - pip install -r requirements.txt
