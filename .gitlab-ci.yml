@@ -5,9 +5,7 @@ test:
     - echo "hello world cruel world"
     - echo "hello hi"
     - echo "change"
-asdfadsf
-asdfadsf
-    -
+    - echo "change 2"
   # - apt-get update -qy
   # - apt-get install -y python-dev python-pip
   # - pip install -r requirements.txt
