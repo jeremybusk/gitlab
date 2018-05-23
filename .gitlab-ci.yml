@@ -4,8 +4,6 @@ test:
     - echo "hello world cruel world"
     - echo "hello world cruel world"
     - echo "hello hi"
- asdfasdf
- asdf - 
   # - apt-get update -qy
   # - apt-get install -y python-dev python-pip
   # - pip install -r requirements.txt
