@@ -1,0 +1,7 @@
+test:
+  script:
+    - echo "hello world"
+  # - apt-get update -qy
+  # - apt-get install -y python-dev python-pip
+  # - pip install -r requirements.txt
+  # - python -V 
