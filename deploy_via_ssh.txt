@@ -1,0 +1,43 @@
+Deploying Gitlab-CI Applications Using SSH
+This will help any of you deploy your applications to a host with a public ip address.
+
+Reference Doc
+https://docs.gitlab.com/ee/ci/ssh_keys/
+
+Requirements:
+Virtual Machine Host i.e. hostname
+DNS myname.example.com
+Public ip address (IPv4 and maybe even IPv6 when available)
+
+Create gitlab-cicd ssh key pair and add where needed
+ssh-keygen -t ed25519 -f .ssh/id_myname-gitlab-cicd
+cat .ssh/id_myname-gitlab-cicd.pub and copy this public key to your Gitlab user ssh keys under settings as well as add it to /root/.ssh/authorized_keys on destination host
+Go to your projects CI/CD settings (even forked project) and add two variables SSH_PRIVATE_KEY & SSH_PUBLIC_KEY  - Make sure to protect these variables if needed.
+
+
+Add these lines to gitlab script
+
+        ## Add ssh so it can git clone private repos (third-party).
+        - apt-get install -y openssh-client rsync
+        - if [ ! -d ~/.ssh ]; then mkdir ~/.ssh; fi
+        - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' > ~/.ssh/id_myname-gitlab-cicd
+        - chmod 600 ~/.ssh/id_myname-gitlab-cicd
+        - eval $(ssh-agent -s)
+        - ssh-add ~/.ssh/id_myname-gitlab-cicd
+
+
+This is an example of deploying it on dev branch commit
+
+dev_deploy:
+  stage: dev_deploy
+  script: rsync -avrz --delete --exclude='.git/' --exclude='.gitlab-ci.yml' --exclude='media/' -e "ssh -p 22 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" . root@hostname.example.com:/var/www/html/
+  only:
+    - dev
+
+You can now serve up using node, python, nginx, apache whatever you want. Just bind and connect to the appropriate tcp/udp port. If public, make sure to be security conscious and use a firewall or other means. iptables/ufw/firewalld are the usual suspects.
+
+You of course can use ssh or scp as you wish.
+More resources
+https://computer.howstuffworks.com/dns.htm
+
+
