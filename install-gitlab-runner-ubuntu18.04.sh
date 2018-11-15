@@ -2,7 +2,7 @@
 ## Debian/Ubuntu/Mint Install Docker CE, Gitlab Runner & Register
 # ref https://docs.gitlab.com/runner/install/linux-repository.html
 
-# Install Docker-CE
+## Install Docker-CE
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/
 sudo apt-get update
 sudo apt-get -y install \
@@ -20,8 +20,8 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-ce
 
-
-
+## Install Gitlab Runner
+# https://docs.gitlab.com/runner/install/linux-repository.html
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
 
 cat > /etc/apt/preferences.d/pin-gitlab-runner.pref <<EOF
@@ -34,8 +34,9 @@ EOF
 sudo apt-get update
 sudo apt-get -y install gitlab-runner
  
-## Update 
+## Update Gitlab Runner
 # sudo apt-get update
 # sudo apt-get -y install gitlab-runner
-# Register runner
+
+## Register runner
 sudo gitlab-runner register
