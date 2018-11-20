@@ -13,7 +13,7 @@ sudo apt-get -y install \
 
 apt-get install -yq lxd zfsutils-linux
 sudo lxd init
-
+install-18.04-lxd-runner.sh
 ## Install Gitlab Runner
 # https://docs.gitlab.com/runner/install/linux-repository.html
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
