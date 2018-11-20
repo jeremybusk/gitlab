@@ -34,3 +34,11 @@ sudo apt-get -y install gitlab-runner
 
 ## Register runner
 sudo gitlab-runner register
+
+# Increase concurrent runner amount.
+sed -i 's/^concurrent.*/concurrent = 10/g' /etc/gitlab-runner/config.toml
+
+# Allow gitlab-runner user sudo command access so it can use when needed.
+# Setting is generic and open. Modify this for tighter more grainular control.
+echo "gitlab-runner     ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers
+
